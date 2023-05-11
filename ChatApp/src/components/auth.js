@@ -8,8 +8,6 @@ import Cookies from 'universal-cookie';
  
 const cookies = new Cookies();
  
-
-
 const Auth = ({setIsAuth}) => {
   
   const signInWithGoogle = async () => {
@@ -22,13 +20,6 @@ const Auth = ({setIsAuth}) => {
     }
   };
 
-  // const logOut = async () => {
-  //   try {
-  //     await signOut(auth);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   return (
     <>

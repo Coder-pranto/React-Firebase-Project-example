@@ -11,21 +11,21 @@ const messageRef = collection(db, "messages");
 
 
 useEffect(() => {
-  const queryMessage = query(messageRef, where("room", "==", chatroom),orderBy("createdAt"));
+  const queryMessage = query(messageRef, where("room", "==", chatroom),orderBy("createAt"));
 
   const unsubscribe = onSnapshot(queryMessage, (snapshot) => {
-    let messagesData = [];
+    let msg = [];
     snapshot.forEach((doc) => {
-        messagesData.push({...doc.data(), id: doc.id});
+        msg.push({...doc.data(), id: doc.id});
     });
-console.log(messagesData);
-    setMsg(messagesData)
+    console.log("messagesData");
+    setMsg(msg)
 })
 
   return () => unsubscribe();
     
   
-}, []);
+},[]);
 
 
 
@@ -40,22 +40,22 @@ const handleSubmit = async (e) => {
     room: chatroom,
   });
 
-  setNewMessage('');
+  setNewMessage("");
 };
 
   return (
-    <div className='container border border-warning py-3 my-3'>
-      <div className='header'>
-        <h1 className='text-center'>Welcome to: {chatroom.toUpperCase()}</h1>
-      </div>
-      <div className='messages'>
-        {msg.map((message) => (
-          <div key={message.id} className='message'>
-            <span className='user'>{message.user}:</span> {message.text}
-          </div>
-        ))}
-      </div>
-      <form onSubmit={handleSubmit} method='post'>
+    <div className='container p-3 my-3 border border-primary'>
+      <div className='text-center border border-primary bg-primary text-white'>
+      <h1>Welcome to: {chatroom.toUpperCase()}</h1>
+    </div>
+    <div >
+      {msg.map((x) => (
+        <div key={x.id}>
+          <span className='font-weight-bold font-italic' >{x.user}:</span> {x.text}
+        </div>
+      ))}
+    </div>
+      <form onSubmit={handleSubmit}>
         <div className='form-group'>
           <input
             type='text'
@@ -67,10 +67,12 @@ const handleSubmit = async (e) => {
             type='submit'
             className='form-control btn btn-sm btn-secondary py-2'
           >
-            Send <i className='fa fa-paper-plane' aria-hidden='true'></i>
+            Send <i className='fa fa-paper-plane'></i>
           </button>
         </div>
       </form>
+
+      
     </div>
   );
 }
