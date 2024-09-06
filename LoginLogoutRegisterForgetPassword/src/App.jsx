@@ -2,13 +2,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import ForgotPassword from './components/ForgotPassword'
-
+import Home from "./components/Home"; 
+import ForgotPassword from "./components/ForgotPassword";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Register />,
+    element: <Home />, 
+  },
+  {
+    path: "/register",
+    element: <Register />, 
   },
   {
     path: "/login",
@@ -31,7 +35,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
